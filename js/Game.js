@@ -40,18 +40,57 @@ class Game {
 		this.activePhrase.addPhraseToDisplay();
 	}
 
-	handleInteraction() {
-
+	handleInteraction(choice) {
+		if (this.activePhrase.checkLetter(choice) ) {
+			choice.classList.add('chosen');
+			choice.classList.add('success');
+			this.activePhrase.showMatchedLetter(choice.innerHTML);
+			if (this.checkForWin() ) this.gameOver(true);
+		} else {
+			choice.classList.add('chosen');
+			choice.classList.add('error');
+		}
 	}
 
 	checkForWin() {
+		let phraseLength = document.querySelectorAll('.letter').length;
+		let correctLength = document.querySelectorAll('.show').length;
 
+		if ( correctLength !== phraseLength) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	removeLife() {
-
+		if (this.missed < 4) {
+			let score = this.missed;
+			let heartImg = document.querySelectorAll('.tries');
+			heartImg[score].classList.add('lostHeart');
+			this.missed ++;
+		} else {
+			this.gameOver(false);
+			this.activePhrase = null;
+		}
 	}
-	gameOver() {
+	gameOver(win) {
+		let titleText = document.querySelector('.title');
+		let endMessage = document.querySelector('#game-over-message');
+		if (win) {
+			setTimeout(function() {
+				titleText.innerHTML = `You've won!`;
+				endMessage.innerHTML = `Play Again?`;
+				this.overlay.classlist.add('win');
+			}, 1400);
+		} else {
+			window.setTimeout(function() {
+				titleText.innerHTML = `You've lost!`;
+				endMessage.innerHTML = `Play Again?`;
+				this.overlay.classList.add('lose');
+			}, 1400);
+		}
+		this.activePhrase = null;
 	}
 
 } /* /Game */

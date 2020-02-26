@@ -18,14 +18,21 @@ class Phrase {
 		}
 	}
 
-	checkLetter() {
-		this.phrase.forEach((element) =>{
-
-		});
+	checkLetter(letter) {
+		if (this.phrase.split("").includes(letter)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	showMatchedLetter() {
-
+	showMatchedLetter(matchedLetter) {
+		if (this.checkLetter(matchedLetter)) {
+			let letters = document.querySelectorAll('.letter');
+			letters.forEach((match) => {
+				match.classList.add('show');
+			});
+		}
 	}
 
 
