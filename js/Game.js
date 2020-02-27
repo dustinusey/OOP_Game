@@ -1,6 +1,6 @@
 class Game {
 	constructor(){
-		this.missed = 0;
+		this.missed = 4;
 		this.phrases = this.createPhrases();
 		this.activePhrase = null;
 	}
@@ -45,10 +45,11 @@ class Game {
 			choice.classList.add('chosen');
 			choice.classList.add('success');
 			this.activePhrase.showMatchedLetter(choice.innerHTML);
-			if (this.checkForWin() ) this.gameOver(true);
+			if (this.checkForWin()) this.gameOver(true);
 		} else {
 			choice.classList.add('chosen');
 			choice.classList.add('error');
+			this.removeLife();
 		}
 	}
 
@@ -64,31 +65,39 @@ class Game {
 	}
 
 	removeLife() {
-		if (this.missed < 4) {
-			let score = this.missed;
-			let heartImg = document.querySelectorAll('.tries');
+		let score = this.missed;
+		let heartImg = document.querySelectorAll('.tries');
+		if (this.missed == 0) {
 			heartImg[score].classList.add('lostHeart');
-			this.missed ++;
-		} else {
 			this.gameOver(false);
 			this.activePhrase = null;
+			
+		} else if
+			(this.missed <= 4) {
+			heartImg[score].classList.add('lostHeart');
+			this.missed--;
+			console.log(this.missed);
 		}
 	}
 	gameOver(win) {
-		let titleText = document.querySelector('.title');
-		let endMessage = document.querySelector('#game-over-message');
+		const overlay = document.getElementById('overlay');
+		const titleText = document.querySelector('.title');
+		const endMessage = document.querySelector('#game-over-message');
+		const startGame = document.getElementById('btn__reset');
 		if (win) {
-			setTimeout(function() {
+				titleText.classList.remove('out-up');
 				titleText.innerHTML = `You've won!`;
 				endMessage.innerHTML = `Play Again?`;
-				this.overlay.classlist.add('win');
-			}, 1400);
+				overlay.classList.add('win');
+				overlay.classList.remove('overlay-out');
+				startGame.classList.remove('out-down');
 		} else {
-			window.setTimeout(function() {
+			   titleText.classList.remove('out-up');
 				titleText.innerHTML = `You've lost!`;
 				endMessage.innerHTML = `Play Again?`;
-				this.overlay.classList.add('lose');
-			}, 1400);
+				overlay.classList.add('lose');
+				overlay.classList.remove('overlay-out');
+				startGame.classList.remove('out-down');	
 		}
 		this.activePhrase = null;
 	}

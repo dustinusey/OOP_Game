@@ -11,15 +11,16 @@ class Phrase {
 		let ul = document.querySelector('#phrase ul');
 		for (let i = 0; i < this.phrase.length; i ++ ) {
 			if (phraseSplit[i] === " ") {
+				console.log(`${phraseSplit[i]}`)
 				ul.innerHTML += `<li class="space">${phraseSplit[i]}</li>`
 			} else {
-				ul.innerHTML += `<li class="letter">${phraseSplit[i]}</li>`
+				ul.innerHTML += `<li class="letter ${phraseSplit[i]}">${phraseSplit[i]}</li>`
 			}
 		}
 	}
 
-	checkLetter(letter) {
-		if (this.phrase.split("").includes(letter)) {
+	checkLetter(choice) {
+		if (this.phrase.split("").includes(choice.innerHTML)) {
 			return true;
 		} else {
 			return false;
@@ -28,7 +29,7 @@ class Phrase {
 
 	showMatchedLetter(matchedLetter) {
 		if (this.checkLetter(matchedLetter)) {
-			let letters = document.querySelectorAll('.letter');
+			let letters = document.querySelectorAll(`.${matchedLetter}`);
 			letters.forEach((match) => {
 				match.classList.add('show');
 			});
