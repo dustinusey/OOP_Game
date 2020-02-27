@@ -13,7 +13,7 @@ startGame.addEventListener('click', function() {
 
 qwerty.addEventListener('click', function(e) {
 	if (e.target.classList.contains('key')) {
-		game.handleInteraction(e.target.textContent);
+		game.handleInteraction(e.target);
 	}
 });
 

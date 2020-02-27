@@ -41,10 +41,10 @@ class Game {
 	}
 
 	handleInteraction(choice) {
-		if (this.activePhrase.checkLetter(choice) ) {
+		if (this.activePhrase.checkLetter(choice.textContent) ) {
 			choice.classList.add('chosen');
 			choice.classList.add('success');
-			this.activePhrase.showMatchedLetter(choice.innerHTML);
+			this.activePhrase.showMatchedLetter(choice.textContent);
 			if (this.checkForWin()) this.gameOver(true);
 		} else {
 			choice.classList.add('chosen');
@@ -53,6 +53,16 @@ class Game {
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+	
 	checkForWin() {
 		let phraseLength = document.querySelectorAll('.letter').length;
 		let correctLength = document.querySelectorAll('.show').length;

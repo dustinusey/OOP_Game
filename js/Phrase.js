@@ -19,8 +19,8 @@ class Phrase {
 		}
 	}
 
-	checkLetter(choice) {
-		if (this.phrase.split("").includes(choice.innerHTML)) {
+	checkLetter(letter) {
+		if (this.phrase.split("").includes(letter)) {
 			return true;
 		} else {
 			return false;
