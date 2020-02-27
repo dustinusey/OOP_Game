@@ -36,6 +36,7 @@ class Game {
 	};
 
 	startGame() {
+		this.gameReset();
 		this.activePhrase = this.getRandomPhrase();
 		this.activePhrase.addPhraseToDisplay();
 	}
@@ -53,16 +54,6 @@ class Game {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-	
 	checkForWin() {
 		let phraseLength = document.querySelectorAll('.letter').length;
 		let correctLength = document.querySelectorAll('.show').length;
@@ -76,15 +67,15 @@ class Game {
 
 	removeLife() {
 		let score = this.missed;
-		let heartImg = document.querySelectorAll('.tries');
+		let heartImg = document.querySelectorAll('.tries img');
 		if (this.missed == 0) {
-			heartImg[score].classList.add('lostHeart');
+			heartImg[score].src = 'images/lostHeart.png';
 			this.gameOver(false);
 			this.activePhrase = null;
 			
 		} else if
 			(this.missed <= 4) {
-			heartImg[score].classList.add('lostHeart');
+			heartImg[score].src = 'images/lostHeart.png';
 			this.missed--;
 			console.log(this.missed);
 		}
@@ -111,5 +102,25 @@ class Game {
 		}
 		this.activePhrase = null;
 	}
+
+	gameReset() {
+		this.missed = 4;
+		const buttons = document.querySelectorAll('#qwerty button');
+		const ul = document.querySelector('#phrase ul');
+		const heart = document.querySelectorAll('.tries img');
+		const overlay = document.getElementById('overlay');
+
+		overlay.classList = 'start';
+
+		for (let i = 0; i < buttons.length; i ++ ) {
+			buttons[i].classList = ('key');
+		}
+		for (let j = 0; j < heart.length; j ++ ) {
+			heart[j].src = 'images/liveHeart.png';
+		}
+		ul.innerHTML = '';
+	}
+
+
 
 } /* /Game */

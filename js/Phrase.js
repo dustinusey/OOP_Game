@@ -11,7 +11,6 @@ class Phrase {
 		let ul = document.querySelector('#phrase ul');
 		for (let i = 0; i < this.phrase.length; i ++ ) {
 			if (phraseSplit[i] === " ") {
-				console.log(`${phraseSplit[i]}`)
 				ul.innerHTML += `<li class="space">${phraseSplit[i]}</li>`
 			} else {
 				ul.innerHTML += `<li class="letter ${phraseSplit[i]}">${phraseSplit[i]}</li>`
@@ -32,6 +31,7 @@ class Phrase {
 			let letters = document.querySelectorAll(`.${matchedLetter}`);
 			letters.forEach((match) => {
 				match.classList.add('show');
+				match.classList.add('rubberBand');
 			});
 		}
 	}

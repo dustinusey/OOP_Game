@@ -2,8 +2,10 @@ const startGame = document.getElementById('btn__reset');
 const overlay = document.getElementById('overlay');
 const homeh2 = document.querySelector('.title');
 
+const game = new Game();
 
 startGame.addEventListener('click', function() {
+	game.startGame();
 	startGame.classList.add('out-down');
 	homeh2.classList.add('out-up');
 	window.setTimeout(function() {
@@ -17,14 +19,4 @@ qwerty.addEventListener('click', function(e) {
 	}
 });
 
-
-// Game
-
-
-
-const game = new Game();
-game.startGame();
-console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
-
-console.log(game.activePhrase);
 
